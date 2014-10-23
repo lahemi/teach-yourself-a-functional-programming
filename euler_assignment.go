@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 /*
@@ -89,6 +90,7 @@ c must be odd
 r must be even
 */
 func problem9() int {
+	// Perhaps a bit naive implementation.
 	factor := func(n int) (ret []int) {
 		for i := 1; i <= n; i++ {
 			if n%i == 0 {
@@ -112,7 +114,7 @@ func problem9() int {
 		}
 		return
 	}
-    // Because Dickson's method!
+	// Because Dickson's method!
 	dickson := func(r int) int { return (r * r) / 2 }
 
 	// Arbitrary, but sufficient, limit. r must always be even.
@@ -150,7 +152,34 @@ func problem9() int {
  * rows:
  */
 func problem18() int {
-	return 0
+	max := func(x, y int) int {
+		if x < y {
+			return y
+		}
+		return x
+	}
+	type Data []int
+	var data = []Data{}
+	snl := strings.Split(input18, "\n")
+	for i := 1; i < len(snl)-1; i++ {
+		sints := strings.Split(snl[i], " ")
+		var nums []int
+		for _, n := range sints {
+			cn, _ := strconv.Atoi(n) // There is nothing but ints in data, ignore err.
+			nums = append(nums, cn)
+		}
+		data = append(data, nums)
+	}
+	for line := len(data) - 2; line >= 0; line-- {
+		for pos := 0; pos < len(data[line]); pos++ {
+			e1, e2 := data[line+1][pos], data[line+1][pos+1]
+			cur := data[line][pos]
+			cur += max(e1, e2)
+			data[line][pos] = cur
+		}
+	}
+
+	return data[0][0]
 }
 
 /*
@@ -176,7 +205,34 @@ func problem18() int {
  * efficient algorithm to solve it. ;o)
  */
 func problem67() int {
-	return 0
+	max := func(x, y int) int {
+		if x < y {
+			return y
+		}
+		return x
+	}
+	type Data []int
+	var data = []Data{}
+	snl := strings.Split(input67, "\n")
+	for i := 1; i < len(snl)-1; i++ {
+		sints := strings.Split(snl[i], " ")
+		var nums []int
+		for _, n := range sints {
+			cn, _ := strconv.Atoi(n) // There is nothing but ints in data, ignore err.
+			nums = append(nums, cn)
+		}
+		data = append(data, nums)
+	}
+	for line := len(data) - 2; line >= 0; line-- {
+		for pos := 0; pos < len(data[line]); pos++ {
+			e1, e2 := data[line+1][pos], data[line+1][pos+1]
+			cur := data[line][pos]
+			cur += max(e1, e2)
+			data[line][pos] = cur
+		}
+	}
+
+	return data[0][0]
 }
 
 func resetColours()  { fmt.Print("\033[0m") }

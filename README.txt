@@ -14,5 +14,14 @@ locating those data files somewhere on system since they are
 now compiled as a part of the program.
 
 
-Alternative solutions using other languages might be added later on.
+
+Only the first two, problems 2 and 4, are solved using
+Clojure 1.6 at the moment.
+
+
+
+The code comes with absolutely no warranty, and you
+are entitled to use them in any manner you deem fit.
+
+2014, Lauri Peltomäki, no rights reserved.
 
